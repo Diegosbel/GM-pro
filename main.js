@@ -53,22 +53,27 @@ do {
 
         case "PLACA MADRE":
             resultado("Placa madre")
+            alert("$18000 añadido a la cuenta")
             break;
 
         case "MEMORIA RAM":
             resultado("Memoria ram")
+            alert("$11000 añadido a la cuenta")
             break;
 
         case "DISCO SOLIDO":
             resultado("Disco solido")
+            alert("$15000 añadido a la cuenta")
             break;
 
         case "FUENTE":
             resultado("Fuente")
+            alert("$9000 añadido a la cuenta")
             break;
 
         case "GABINETE":
             resultado("Gabinete")
+            alert("$19000 añadido a la cuenta")
             break;
 
         default:
@@ -130,6 +135,7 @@ while (formaPago != "FINALIZAR") {
                 break;
             case 12:
                 alert("Su nuevo total es de: $" + parseInt(total * 1.15))
+                break;
             default:
                 alert("Ingrese un valor de cuota correcto")
                 break;
