@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.navbar-nav {
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+}
+
+
+body {
+    background-image: url(./assets/anton-maksimov-5642-su-MSzGw5V0ui8-unsplash.jpg);
+    object-fit: cover;
+}
