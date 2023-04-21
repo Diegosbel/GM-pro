@@ -2,49 +2,163 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <title>GM-PRO</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://bootswatch.com/5/quartz/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>GM-PRO</title>
 </head>
 
 <body>
 
-    <nav class="navbar bg-dark" data-bs-theme="dark">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">GM-PRO</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Arma tu PC</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+  <header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand titulo_empresa" href="./index.html">GAME MASTER PRO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+          aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+          <form class="d-flex buscador">
+            <input class="form-control me-sm-2" type="search" placeholder="Search">
+          </form>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+          </button>
+
+        </div>
+      </div>
     </nav>
+  </header>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-        crossorigin="anonymous"></script>
-    <script src="./main.js"></script>
+  <main>
+
+    <h1 class="titulo text-center mt-4">Conoce nuestor productos</h1>
+
+
+    <section id="baner">
+      <div class="card mb-3 mt-5 ">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="./assets/procesador.jpg" class="img-left img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title text-center">Procesadores</h2>
+              <p class="card-text text-center">¡Mejora tus tareas cotidianas, disfruta de tus juegos y potencia tus
+                proyectos con
+                nuestros microprocesadores de última generación!</p>
+              <p class="card-text text-center"><small class="text-body-secondary">¡Haz clic en nuestro banner y descubre
+                  el poder de
+                  los microprocesadores en tu vida diaria!</small></p>
+              <a class="button" href="#tituloProcesador">Ver mas</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card card-2 mb-3 mt-5">
+        <div class="banner-2">
+          <div class="col-md-4">
+            <img src="./assets/placa-madre.jpg" class="img-fluid img-end rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title text-center">Placas madres</h2>
+              <p class="card-text text-center">¡Mejora tu experiencia de computación con nuestra placa madre de alto
+                rendimiento!
+              </p>
+              <p class="card-text text-center"><small class="text-body-secondary">¡Haz clic en nuestro banner y lleva tu
+                  PC al
+                  siguiente nivel con nuestra placa madre de última generación!</small></p>
+              <a href="#tituloMother">Ver mas</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card mb-3 mt-5">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="./assets/rams.jpg" class="img-fluid img-end rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title text-center">Memorias ram</h2>
+              <p class="card-text text-center">¡Actualiza tu servidor con nuestra Memoria RAM de última generación y
+                disfruta de una experiencia de navegación más rápida y fluida para tus usuarios!
+              </p>
+              <p class="card-text text-center"><small class="text-body-secondary">¡Optimiza el rendimiento de tu
+                  servidor con nuestra potente Memorias RAM! </small></p>
+              <a href="#tituloRam">Ver mas</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <h2 id="tituloProcesador" class="tituloProcesador text-center mt-5 mb-4">Procesadores</h2>
+    <section class="procesador" id="procesador"></section>
+
+
+    <h2 id="tituloMother" class="text-center mt-5 mb-4">Placas Madres</h2>
+    <section class="mother" id="mother"></section>
+
+
+    <h2 id="tituloRam" class="text-center mt-5 mb-4">Memorias Ram</h2>
+    <section class="ram" id="ram"></section>
+
+  </main>
+
+
+
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Mi compra</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="productos_carro">
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">agregar mas productos</button>
+          <button type="button" class="btn btn-primary">finalizar compra</button>
+        </div>
+        <div>
+          <p class="text-center" id="precio_total"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="mt-5 text-center">
+    <h3>Diego Beltramo
+    </h3>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+    crossorigin="anonymous"></script>
+  <script src="./main.js"></script>
 </body>
 
 </html>

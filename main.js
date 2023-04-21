@@ -1,322 +1,221 @@
+const listaProcesadores = [
+  { id: 1, nombre: "AMD Ryzen 3 4100", precio: 32450, cantidad: 1,Stock: 8, type: "procesador", img: "./assets/procesadores/ryzen3.jpg" },
+  { id: 2, nombre: "AMD Ryzen 5 3600 4.2GHz Turbo AM4", precio: 54990, cantidad: 1, Stock: 10, type: "procesador", img: "./assets/procesadores/ryzen5.jpg" },
+  { id: 3, nombre: "AMD Ryzen 7 7700 5.3GHz Turbo AM5", precio: 160400, cantidad: 1, Stock: 6, type: "procesador", img: "./assets/procesadores/ryzen7.jpg" },
+  { id: 4, nombre: "Intel Core i3 10100F 4.3GHz", precio: 28950, cantidad: 1, Stock: 10, type: "procesador", img: "./assets/procesadores/inteli3.jpg" },
+  { id: 5, nombre: "Intel Core i5 10400F 4.3GHz", precio: 62000, cantidad: 1, Stock: 10, type: "procesador", img: "./assets/procesadores/inteli5.jpg" },
+  { id: 6, nombre: "Intel Core i7 10700F 4.8GHz", precio: 113990, cantidad: 1, Stock: 6, type: "procesador", img: "./assets/procesadores/inteli7.jpg" }
+]
 
-// FUNCIONES
+const listaPlacas = [
+  { id: 7, nombre: "Mother MSI A320M-A PRO AM4", precio: 25400, cantidad: 1, Stock: 10, type: "mother", img: "./assets/mother/msi-a320.jpg" },
+  { id: 8, nombre: "Mother Gigabyte GA-A320M-H AM4", precio: 24000, cantidad: 1, Stock: 5, type: "mother", img: "./assets/mother/gigabyte-a320.jpg" },
+  { id: 9, nombre: "Mother ASUS TUF B450M-PLUS II AM4", precio: 45900, cantidad: 1, Stock: 5, type: "mother", img: "./assets/mother/asus-plus.jpg" },
+  { id: 10, nombre: "Mother ASUS ROG STRIX X570-E WIFI II", precio: 157700, cantidad: 1, Stock: 6, type: "mother", img: "./assets/mother/asus-rog.jpg" }
+]
 
-const resultado = (producto) => {
-    alert(producto + ESPACIO + "añadido al carro de compras")
-    console.log(producto);
+const listaRam = [
+  { id: 11, nombre: "Memoria Crucial DDR4 4GB 2666MHz Value", precio: 10230, cantidad: 1, Stock: 18, type: "ram", img: "./assets/ram/crucial-ddr4.jpg" },
+  { id: 12, nombre: "Memoria Team DDR4 4GB 2400MHz Elite Plus Red", precio: 11650, cantidad: 1, Stock: 22, type: "ram", img: "./assets/ram/team-ddr4.jpg" },
+  { id: 13, nombre: "Memoria Kingston DDR4 8GB 3200MHz Fury Beast CL16", precio: 17430, cantidad: 1, Stock: 22, type: "ram", img: "./assets/ram/fury-ddr4.jpg" },
+  { id: 14, nombre: "Memoria Team DDR4 8GB 2666MHz T-Force Vulcan Z Gray", precio: 18550, cantidad: 1, Stock: 14, type: "ram", img: "./assets/ram/vulcan-ddr4.jpg" },
+  { id: 15, nombre: "Memoria Team DDR4 8GB 3200MHz Elite Red", precio: 18800, cantidad: 1, Stock: 24, type: "ram", img: "./assets/ram/elite-ddr4.jpg" },
+  { id: 16, nombre: "Memoria Patriot Viper DDR4 8GB 3200MHz Steel RGB", precio: 20150, cantidad: 1, Stock: 20, type: "ram", img: "./assets/ram/viper-ddr4.jpg" }
+]
+
+class NuestrosProductos {
+  constructor() {
+    this.listaProductosProcesadores = listaProcesadores
+    this.listaProductosPlacas = listaPlacas
+    this.listaProductosRam = listaRam
+
+  }
+
+
+
+
+
+  mostrarDomProcesador() {
+    this.listaProductosProcesadores.forEach(Producto => (
+      procesador.innerHTML += `<div class="card d-flex  mt-2" style="width: 18rem;">
+     <img src="${Producto.img}" class="card-img-top" alt="...">
+     <div class="card-body">
+       <h5 class="card-title">${Producto.nombre}</h5>
+       <p class="card-text">$${Producto.precio}</p>
+       <a href="#" id="agregar-${Producto.id}" class="btn btn-primary">Añadir al carro</a>
+     </div>
+    </div>`
+    ))
+  }
+
+  mostrarDomPlaca() {
+    this.listaProductosPlacas.forEach(Producto => (
+      mother.innerHTML += `<div class="card d-flex  mt-2" style="width: 18rem;">
+     <img src="${Producto.img}" class="card-img-top" alt="...">
+     <div class="card-body">
+       <h5 class="card-title">${Producto.nombre}</h5>
+       <p class="card-text">$${Producto.precio}</p>
+       <a href="#" id="agregar-${Producto.id}" class="btn btn-primary">Añadir al carro</a>
+     </div>
+    </div>`
+    ))
+  }
+
+
+  mostrarDomRam() {
+    this.listaProductosRam.forEach(Producto => (
+      ram.innerHTML += `<div class="card d-flex  mt-2" style="width: 18rem;">
+     <img src="${Producto.img}" class="card-img-top" alt="...">
+     <div class="card-body">
+       <h5 class="card-title">${Producto.nombre}</h5>
+       <p class="card-text">$${Producto.precio}</p>
+       <a href="#" id="agregar-${Producto.id}" class="btn btn-primary">Añadir al carro</a>
+     </div>
+    </div>`
+    ))
+  }
+
+}
+
+class carritoDeCompras {
+  constructor() {
+    this.listaCarro = []
+    this.total = document.getElementById("precio_total")
+  }
+
+
+
+  agregarCompra(producto) {
+    this.listaCarro.push(producto)
+  }
+
+
+
+  guardarEnStorage() {
+    let listaCarroJSON = JSON.stringify(this.listaCarro)
+    localStorage.setItem("listaCarro", listaCarroJSON)
+  }
+
+
+  levantarDeStorage() {
+    this.listaCarro = JSON.parse(localStorage.getItem("listaCarro")) || []
+  }
+
+  limpiarCarro(productos_carro) {
+    productos_carro.innerHTML = ""
+  }
+
+
+  mostrarCompra(productos_carro) {
+
+    this.limpiarCarro(productos_carro)
+    this.listaCarro.forEach(producto => {
+      productos_carro.innerHTML += `
+      <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="${producto.img}" class="img-fluid rounded-start" alt="">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">Precio : $${producto.precio}</p>
+            <p class="card-text">cantidad : ${producto.cantidad}</p>
+          </div>
+        </div>
+      </div>
+    </div>`
+    })
+
+    this.mostrarTotalEnDom()
+  }
+
+
+  calcularTotal() {
+
+    let total = 0
+    this.listaCarro.forEach(producto => {
+      total += producto.precio * producto.cantidad
+    })
+
+    return total;
+  }
+
+  mostrarTotalEnDom() {
+    this.total.innerHTML = `El total de su compra es $${this.calcularTotal()}`
+  }
 }
 
 
 
-
-// INICIO DE PAGINA Y COMUNICACION AL CLIENTE
-
-alert("Bienvenido a GMpro!\nA continuacion ingresa tus datos para empezar")
-
-let nombre = prompt("Ingresa tu nombre")
-
-console.log(nombre)
-
-let apellido = prompt("ingresa tu apellido")
-
-console.log(apellido)
-
-let email = prompt("ingresa tu email")
-
-console.log(email)
-
-const ESPACIO = " "
-
-alert("Hola" + ESPACIO + nombre + ESPACIO + apellido + ESPACIO + "ya validamos tu email (" + email + ") y podes empezar con la compra")
-
-alert("Estos son nuestros productos")
-
-
-
-// DESCRIPCION DE PRODUCTOS
-
-const producto = ['PROCESADOR', 'PLACA MADRE', 'MEMORIA RAM']
-
-for (let index = 0; index < producto.length; index++) {
-    alert(producto[index]);
-
-}
-
-// CLASES Y FUNCIONES DE ORDEN SUPERIOR
-
-alert("Ingresa los productos que quisieras agregar a la compra")
-
-
-class Producto {
-    constructor(id, nombre, precio) {
-        
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.cantidad = 1;
-    }
-}
-
-
-// AÑADIDO DE LISTA DE LOS PRODUCTOS
-
-
-class lista {
-    constructor() {
-        this.listaProcesadores = [];
-        this.listaMother = [];
-        this.ram = [];
-    }
-
-
-
-    // LISTA DE PROCESADORES
-
-
-    procesadores() {
-        this.listaProcesadores =
-            [new Producto(1, "AMD Ryzen 3 4100", 32450),
-            new Producto(2, "AMD Ryzen 5 3600 4.2GHz Turbo AM4", 54990),
-            new Producto(3, "AMD Ryzen 7 7700 5.3GHz Turbo AM5", 160400),
-            new Producto(4, "Intel Core i3 10100F 4.3GHz", 28950),
-            new Producto(5, "Intel Core i5 10400F 4.3GHz", 62000),
-            new Producto(6, "Intel Core i7 10700F 4.8GHz", 113990)]
-    }
-
-
-
-
-    verProcesador() {
-        let lista = ""
-        this.listaProcesadores.forEach(producto => {
-            lista += "\nid =" + " " + producto.id + ")" + " " + producto.nombre + " " + "$" + producto.precio
-        })
-        return lista
-    }
-
-
-
-    anadirProcesador(id) {
-
-        return this.listaProcesadores.find(el => el.id == id)
-    }
-
-
-
-
-    // LISTA DE MOTHER
-
-
-
-    mother() {
-        this.listaMother =
-            [new Producto(1, "Mother MSI A320M-A PRO AM4", 25400),
-            new Producto(2, "Mother Gigabyte GA-A320M-H AM4", 24000),
-            new Producto(3, "Mother ASUS TUF B450M-PLUS II AM4", 45900),
-            new Producto(4, "Mother ASUS ROG STRIX X570-E WIFI II", 157700),]
-    }
-
-
-
-
-    verMother() {
-        let lista = ""
-        this.listaMother.forEach(producto => {
-            lista += "\nid =" + " " + producto.id + ")" + " " + producto.nombre + " " + "$" + producto.precio
-        })
-        return lista
-    }
-
-
-    anadirMother(id) {
-
-        return this.listaMother.find(el => el.id == id)
-    }
-
-
-
-    // LISTA DE MEMORIA RAM
-
-
-    memoriaRam() {
-        this.listaRam =
-        [new Producto(1, "Memoria Crucial DDR4 4GB 2666MHz Value", 10230),
-        new Producto(2, "Memoria Team DDR4 4GB 2400MHz Elite Plus Red", 11650),
-        new Producto(3, "Memoria Kingston DDR4 8GB 3200MHz Fury Beast CL16", 17430),
-        new Producto(4, "Memoria Team DDR4 8GB 2666MHz T-Force Vulcan Z Gray", 18550),
-        new Producto(5, "Memoria Team DDR4 8GB 3200MHz Elite Red", 18800),
-        new Producto(6, "Memoria Patriot Viper DDR4 8GB 3200MHz Steel RGB", 20150)]
-    }
-
-
-    verRam() {
-        let lista = ""
-        this.listaRam.forEach(producto => {
-            lista += "\nid =" + " " + producto.id + ")" + " " + producto.nombre + " " + "$" + producto.precio
-        })
-        return lista
-    }
-
-
-    anadirRam(id) {
-
-        return this.listaRam.find(el => el.id == id)
-    }
-
-
+const gestionarProcesadores = new NuestrosProductos()
+gestionarProcesadores.listaProductosProcesadores
+const gestionarMother = new NuestrosProductos()
+gestionarMother.listaProductosPlacas
+const gestionarRam = new NuestrosProductos()
+gestionarRam.listaProductosRam
+const gestionarCarrito = new carritoDeCompras()
+
+
+// DOM
+
+const catalogo = document.getElementById("catalogo")
+const productos_carro = document.getElementById("productos_carro")
+gestionarProcesadores.mostrarDomProcesador()
+gestionarMother.mostrarDomPlaca()
+gestionarRam.mostrarDomRam()
+//VERIFICO SI CARROCOMPRAS EXISTE EN DOM
+
+if (localStorage.getItem("listaCarro")) {
+  gestionarCarrito.levantarDeStorage()
+  gestionarCarrito.mostrarCompra(productos_carro)
+} else {
+  listaCarro = []
 }
 
 
 
-// CARRITO DE COMPRAS
+// DAR EVENTOS
+gestionarProcesadores.listaProductosProcesadores.forEach(producto => {
 
+  const btnCarro = document.getElementById(`agregar-${producto.id}`)
 
-class carroCompras {
-    constructor() {
-        this.listaProductos = []
-    }
+  btnCarro.addEventListener("click", () => {
 
-    itemAgregado(producto) {
+    gestionarCarrito.agregarCompra(producto)
+    gestionarCarrito.guardarEnStorage()
+    gestionarCarrito.mostrarCompra(productos_carro)
 
-        this.listaProductos.push(producto)
+  })
+})
 
 
-    }
 
-    compraTotal() {
+gestionarMother.listaProductosPlacas.forEach(producto => {
 
-        let lista = 0
+  const btnCarro = document.getElementById(`agregar-${producto.id}`)
 
-        this.listaProductos.forEach(producto => {
-            lista += producto.precio * producto.cantidad
-        })
+  btnCarro.addEventListener("click", () => {
 
-        return lista;
+    gestionarCarrito.agregarCompra(producto)
+    gestionarCarrito.guardarEnStorage()
+    gestionarCarrito.mostrarCompra(productos_carro)
 
+  })
+})
 
-    }
 
 
+gestionarRam.listaProductosRam.forEach(producto => {
 
-}
+  const btnCarro = document.getElementById(`agregar-${producto.id}`)
 
+  btnCarro.addEventListener("click", () => {
 
-// INSTANCIAR CLASES
+    gestionarCarrito.agregarCompra(producto)
+    gestionarCarrito.guardarEnStorage()
+    gestionarCarrito.mostrarCompra(productos_carro)
 
-const agregarProducto = new lista()
-const total = new carroCompras()
-
-agregarProducto.procesadores()
-agregarProducto.mother()
-agregarProducto.memoriaRam()
-total.compraTotal()
-
-
-let rta = ""
-
-do {
-
-    // PROCESADORES
-
-    alert("Seleccione el procesador que desea añadir" + agregarProducto.verProcesador());
-
-    let id = prompt("Ingrese el id de procesador a agregar")
-
-    const productos = agregarProducto.anadirProcesador(id)
-    if (productos) {
-        total.itemAgregado(productos)
-    } else { alert("Procesador no añadido") }
-
-
-
-    // PLACAS MADRES
-
-    alert("Seleccione la mother que desea añadir" + agregarProducto.verMother());
-
-    id = prompt("Ingrese el id de la mother a agregar")
-
-    const placa = agregarProducto.anadirMother(id)
-    if (placa) {
-        total.itemAgregado(placa)
-    } else { alert("mother no añadido") }
-
-
-
-
-
-    // MEMORIA RAM
-
-
-    alert("Seleccione la memoria ram que desea añadir" + agregarProducto.verRam());
-
-    id = prompt("Ingrese el id de la memoria ram a agregar")
-
-    const ram = agregarProducto.anadirRam(id)
-    if (ram) {
-        total.itemAgregado(ram)
-    } else { alert("memoria ram no añadido") }
-
-    rta = prompt("Ingrese 'finalizar' para terminar su compra.\nSi desea agregar mas productos ingrese 'continuar' para agregar mas productos").toUpperCase()
-
-} while (rta != "FINALIZAR")
-
-
-// INSTANCIA DE PAGO
-
-let formaPago = " "
-
-while (formaPago != "FINALIZAR") {
-
-    let tipoPago = prompt("Su total es de $" + total.compraTotal() + "\n¿Que tipo de pago desea realizar? Efectivo obtiene un 10% de descuento en su compra\nEfectivo\nDebito\nCredito").toUpperCase()
-
-
-    if (tipoPago == "EFECTIVO") {
-
-        alert("Pago con efectivo seleccionado usted obtiene un 10% de descuento")
-
-
-        let descuento = total.compraTotal() * 0.10
-
-        let precioFinal = total.compraTotal() - descuento
-
-        alert("Su nuevo total es de : $" + precioFinal)
-
-    } else if (tipoPago == "DEBITO") {
-
-        alert("Pago con debito seleccionado")
-        alert("Su nuevo total es de: $" + total.compraTotal())
-
-    } else if (tipoPago == "CREDITO") {
-
-        ("Pago con credito seleccionado")
-
-        let cuota = Number(prompt("Ingrese en cuantas cuotas desea abonarlo:\n1 = precio total\n3 = 5% de recargo\n6 = 10% de recargo\n12 = 15% de recargo"))
-
-        switch (cuota) {
-            case 1:
-                alert("Su nuevo total es de: $" + total.compraTotal())
-                break;
-            case 3:
-                alert("Su nuevo total es de: $" + parseInt(total.compraTotal() * 1.05)+ "\nPago por cuota $" + parseInt(total.compraTotal() * 1.05 / 12))
-                break;
-            case 6:
-                alert("Su nuevo total es de: $" + parseInt(total.compraTotal() * 1.10)+ "\nPago por cuota $" + parseInt(total.compraTotal() * 1.10 / 12))
-                break;
-            case 12:
-                alert("Su nuevo total es de: $" + parseInt(total.compraTotal() * 1.15)+ "\nPago por cuota $" + parseInt(total.compraTotal() * 1.15 / 12))
-                break;
-            default:
-                alert("Ingrese un valor de cuota correcto")
-                break;
-        }
-
-    } else {
-        alert("Ingrese un dato correcto")
-    }
-
-    formaPago = prompt("Para terminar compra escriba FINALIZAR").toUpperCase()
-
-}
-
-alert("Gracias por su compra!")
+  })
+})
 
