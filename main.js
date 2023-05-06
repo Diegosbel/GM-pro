@@ -1,48 +1,47 @@
-const listaProcesadores = [
-  { id: 1, nombre: "AMD Ryzen 3 4100", precio: 32450, cantidad: 1,Stock: 8, type: "procesador", img: "./assets/procesadores/ryzen3.jpg" },
-  { id: 2, nombre: "AMD Ryzen 5 3600 4.2GHz Turbo AM4", precio: 54990, cantidad: 1, Stock: 10, type: "procesador", img: "./assets/procesadores/ryzen5.jpg" },
-  { id: 3, nombre: "AMD Ryzen 7 7700 5.3GHz Turbo AM5", precio: 160400, cantidad: 1, Stock: 6, type: "procesador", img: "./assets/procesadores/ryzen7.jpg" },
-  { id: 4, nombre: "Intel Core i3 10100F 4.3GHz", precio: 28950, cantidad: 1, Stock: 10, type: "procesador", img: "./assets/procesadores/inteli3.jpg" },
-  { id: 5, nombre: "Intel Core i5 10400F 4.3GHz", precio: 62000, cantidad: 1, Stock: 10, type: "procesador", img: "./assets/procesadores/inteli5.jpg" },
-  { id: 6, nombre: "Intel Core i7 10700F 4.8GHz", precio: 113990, cantidad: 1, Stock: 6, type: "procesador", img: "./assets/procesadores/inteli7.jpg" }
-]
-
-const listaPlacas = [
-  { id: 7, nombre: "Mother MSI A320M-A PRO AM4", precio: 25400, cantidad: 1, Stock: 10, type: "mother", img: "./assets/mother/msi-a320.jpg" },
-  { id: 8, nombre: "Mother Gigabyte GA-A320M-H AM4", precio: 24000, cantidad: 1, Stock: 5, type: "mother", img: "./assets/mother/gigabyte-a320.jpg" },
-  { id: 9, nombre: "Mother ASUS TUF B450M-PLUS II AM4", precio: 45900, cantidad: 1, Stock: 5, type: "mother", img: "./assets/mother/asus-plus.jpg" },
-  { id: 10, nombre: "Mother ASUS ROG STRIX X570-E WIFI II", precio: 157700, cantidad: 1, Stock: 6, type: "mother", img: "./assets/mother/asus-rog.jpg" }
-]
-
-const listaRam = [
-  { id: 11, nombre: "Memoria Crucial DDR4 4GB 2666MHz Value", precio: 10230, cantidad: 1, Stock: 18, type: "ram", img: "./assets/ram/crucial-ddr4.jpg" },
-  { id: 12, nombre: "Memoria Team DDR4 4GB 2400MHz Elite Plus Red", precio: 11650, cantidad: 1, Stock: 22, type: "ram", img: "./assets/ram/team-ddr4.jpg" },
-  { id: 13, nombre: "Memoria Kingston DDR4 8GB 3200MHz Fury Beast CL16", precio: 17430, cantidad: 1, Stock: 22, type: "ram", img: "./assets/ram/fury-ddr4.jpg" },
-  { id: 14, nombre: "Memoria Team DDR4 8GB 2666MHz T-Force Vulcan Z Gray", precio: 18550, cantidad: 1, Stock: 14, type: "ram", img: "./assets/ram/vulcan-ddr4.jpg" },
-  { id: 15, nombre: "Memoria Team DDR4 8GB 3200MHz Elite Red", precio: 18800, cantidad: 1, Stock: 24, type: "ram", img: "./assets/ram/elite-ddr4.jpg" },
-  { id: 16, nombre: "Memoria Patriot Viper DDR4 8GB 3200MHz Steel RGB", precio: 20150, cantidad: 1, Stock: 20, type: "ram", img: "./assets/ram/viper-ddr4.jpg" }
-]
 
 class NuestrosProductos {
   constructor() {
-    this.listaProductosProcesadores = listaProcesadores
-    this.listaProductosPlacas = listaPlacas
-    this.listaProductosRam = listaRam
-
+    this.listaProductos = []
+    this.listaProductosProcesadores = []
+    this.listaProductosPlacas = []
+    this.listaProductosRam = []
   }
 
+  async levantarProcesadores(gestionarCarrito) {
+    const resp = await fetch("productos.json")
+    this.listaProductos = await resp.json()
+    this.listaProductosProcesadores = this.listaProductos.filter(t => t.type === "procesador")
 
+    this.mostrarDomProcesador()
+    this.darEventoClickProcesador(gestionarCarrito)
+  }
 
+  async levantarMother(gestionarCarrito) {
+    const resp = await fetch("productos.json")
+    this.listaProductos = await resp.json()
+    this.listaProductosPlacas = this.listaProductos.filter(t => t.type === "mother")
 
+    this.mostrarDomPlaca()
+    this.darEventoClickMother(gestionarCarrito)
+  }
+
+  async levantarRam(gestionarCarrito) {
+    const resp = await fetch("productos.json")
+    this.listaProductos = await resp.json()
+    this.listaProductosRam = this.listaProductos.filter(t => t.type === "ram")
+
+    this.mostrarDomRam()
+    this.darEventoClickRam(gestionarCarrito)
+  }
 
   mostrarDomProcesador() {
     this.listaProductosProcesadores.forEach(Producto => (
       procesador.innerHTML += `<div class="card d-flex  mt-2" style="width: 18rem;">
      <img src="${Producto.img}" class="card-img-top" alt="...">
      <div class="card-body">
-       <h5 class="card-title">${Producto.nombre}</h5>
-       <p class="card-text">$${Producto.precio}</p>
-       <a href="#" id="agregar-${Producto.id}" class="btn btn-primary">Añadir al carro</a>
+       <h5 class="card-title text-center">${Producto.nombre}</h5>
+       <p class="card-text text-center">$${Producto.precio}</p>
+       <a id="agregar-${Producto.id}" class="btn btn_producto btn-primary">Añadir al carro</a>
      </div>
     </div>`
     ))
@@ -53,9 +52,9 @@ class NuestrosProductos {
       mother.innerHTML += `<div class="card d-flex  mt-2" style="width: 18rem;">
      <img src="${Producto.img}" class="card-img-top" alt="...">
      <div class="card-body">
-       <h5 class="card-title">${Producto.nombre}</h5>
-       <p class="card-text">$${Producto.precio}</p>
-       <a href="#" id="agregar-${Producto.id}" class="btn btn-primary">Añadir al carro</a>
+       <h5 class="card-title text-center">${Producto.nombre}</h5>
+       <p class="card-text text-center">$${Producto.precio}</p>
+       <a id="agregar-${Producto.id}" class="btn btn_producto btn-primary">Añadir al carro</a>
      </div>
     </div>`
     ))
@@ -67,26 +66,86 @@ class NuestrosProductos {
       ram.innerHTML += `<div class="card d-flex  mt-2" style="width: 18rem;">
      <img src="${Producto.img}" class="card-img-top" alt="...">
      <div class="card-body">
-       <h5 class="card-title">${Producto.nombre}</h5>
-       <p class="card-text">$${Producto.precio}</p>
-       <a href="#" id="agregar-${Producto.id}" class="btn btn-primary">Añadir al carro</a>
+       <h5 class="card-title text-center">${Producto.nombre}</h5>
+       <p class="card-text text-center">$${Producto.precio}</p>
+       <a id="agregar-${Producto.id}" class="btn btn_producto btn-primary">Añadir al carro</a>
      </div>
     </div>`
     ))
   }
 
+  darEventoClickProcesador(gestionarCarrito) {
+    this.listaProductosProcesadores.forEach(producto => {
+
+      const btnCarro = document.getElementById(`agregar-${producto.id}`)
+
+      btnCarro.addEventListener("click", () => {
+
+        gestionarCarrito.agregar(producto)
+        gestionarCarrito.guardarEnStorage()
+        gestionarCarrito.mostrarCompra(productos_carro)
+
+
+      })
+    })
+  }
+
+
+  darEventoClickMother(gestionarCarrito) {
+    this.listaProductosPlacas.forEach(producto => {
+
+      const btnCarro = document.getElementById(`agregar-${producto.id}`)
+
+      btnCarro.addEventListener("click", () => {
+
+        gestionarCarrito.agregar(producto)
+        gestionarCarrito.guardarEnStorage()
+        gestionarCarrito.mostrarCompra(productos_carro)
+
+      })
+    })
+  }
+
+  darEventoClickRam(gestionarCarrito) {
+    this.listaProductosRam.forEach(producto => {
+
+      const btnCarro = document.getElementById(`agregar-${producto.id}`)
+
+      btnCarro.addEventListener("click", () => {
+
+        gestionarCarrito.agregar(producto)
+        gestionarCarrito.guardarEnStorage()
+        gestionarCarrito.mostrarCompra(productos_carro)
+
+      })
+    })
+  }
 }
 
-class carritoDeCompras {
+class CarritoDeCompras {
   constructor() {
     this.listaCarro = []
+    this.productos_carro = document.getElementById("productos_carro")
     this.total = document.getElementById("precio_total")
   }
 
 
 
-  agregarCompra(producto) {
-    this.listaCarro.push(producto)
+  verificarSiExisteElProducto(producto) {
+    return this.listaCarro.find((elproducto) => elproducto.id == producto.id)
+  }
+
+  agregar(producto) {
+
+    let objeto = this.verificarSiExisteElProducto(producto)
+
+    if (objeto) {
+      objeto.cantidad += 1;
+    } else {
+      {
+        this.listaCarro.push(producto)
+      }
+    }
   }
 
 
@@ -98,33 +157,58 @@ class carritoDeCompras {
 
 
   levantarDeStorage() {
-    this.listaCarro = JSON.parse(localStorage.getItem("listaCarro")) || []
+    this.listaCarro = JSON.parse(localStorage.getItem('listaCarro')) || []
+    if (this.listaCarro.length > 0) {
+      this.mostrarCompra()
+    }
   }
 
-  limpiarCarro(productos_carro) {
-    productos_carro.innerHTML = ""
+  limpiarCarroStorage() {
+    localStorage.removeItem("listaCarro")
+  }
+
+  limpiarCarro() {
+    this.productos_carro.innerHTML = ""
+    this.total.innerHTML = ""
   }
 
 
-  mostrarCompra(productos_carro) {
+  borrar(producto) {
+    let posicion = this.listaCarro.findIndex(miProducto => producto.id == miProducto.id)
 
-    this.limpiarCarro(productos_carro)
+    !(posicion == -1) && this.listaCarro.splice(posicion, 1) 
+  }
+
+  mostrarCompra() {
+
+    this.limpiarCarro()
     this.listaCarro.forEach(producto => {
       productos_carro.innerHTML += `
-      <div class="card mb-3">
+      <div class="card card_carro mb-3">
       <div class="row g-0">
         <div class="col-md-4">
           <img src="${producto.img}" class="img-fluid rounded-start" alt="">
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">${producto.nombre}</h5>
-            <p class="card-text">Precio : $${producto.precio}</p>
-            <p class="card-text">cantidad : ${producto.cantidad}</p>
+            <h5 class="card-title text-center">${producto.nombre}</h5>
+            <p class="card-text text-center">Precio : $${producto.precio}</p>
+            <p class="card-text text-center">cantidad : ${producto.cantidad}</p>
+            <button class="btn btn-dark" id="borrar-${producto.id}"><i class="fa-solid fa-trash"></i></button>
           </div>
         </div>
       </div>
     </div>`
+    })
+
+    this.listaCarro.forEach(producto => {
+      const btnBorrar = document.getElementById(`borrar-${producto.id}`)
+
+      btnBorrar.addEventListener("click", () => {
+        this.borrar(producto)
+        this.guardarEnStorage()
+        this.mostrarCompra()
+      })
     })
 
     this.mostrarTotalEnDom()
@@ -149,73 +233,40 @@ class carritoDeCompras {
 
 
 const gestionarProcesadores = new NuestrosProductos()
-gestionarProcesadores.listaProductosProcesadores
+const gestionarCarrito = new CarritoDeCompras()
+gestionarProcesadores.levantarProcesadores(gestionarCarrito)
 const gestionarMother = new NuestrosProductos()
-gestionarMother.listaProductosPlacas
+gestionarMother.levantarMother(gestionarCarrito)
 const gestionarRam = new NuestrosProductos()
-gestionarRam.listaProductosRam
-const gestionarCarrito = new carritoDeCompras()
+gestionarRam.levantarRam(gestionarCarrito)
 
 
 // DOM
 
 const catalogo = document.getElementById("catalogo")
-const productos_carro = document.getElementById("productos_carro")
 gestionarProcesadores.mostrarDomProcesador()
 gestionarMother.mostrarDomPlaca()
 gestionarRam.mostrarDomRam()
+
+
 //VERIFICO SI CARROCOMPRAS EXISTE EN DOM
 
-if (localStorage.getItem("listaCarro")) {
-  gestionarCarrito.levantarDeStorage()
-  gestionarCarrito.mostrarCompra(productos_carro)
-} else {
-  listaCarro = []
-}
+gestionarCarrito.levantarDeStorage()
 
 
-
-// DAR EVENTOS
-gestionarProcesadores.listaProductosProcesadores.forEach(producto => {
-
-  const btnCarro = document.getElementById(`agregar-${producto.id}`)
-
-  btnCarro.addEventListener("click", () => {
-
-    gestionarCarrito.agregarCompra(producto)
-    gestionarCarrito.guardarEnStorage()
-    gestionarCarrito.mostrarCompra(productos_carro)
-
+const finalizar_compra = document.getElementById("finalizar_compra")
+finalizar_compra.addEventListener("click", () => {
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Compra finalizada con exito',
+    showConfirmButton: false,
+    timer: 1500
   })
+
+  gestionarCarrito.limpiarCarro()
+
+  gestionarCarrito.limpiarCarroStorage()
+
+  gestionarCarrito.listaCarro = []
 })
-
-
-
-gestionarMother.listaProductosPlacas.forEach(producto => {
-
-  const btnCarro = document.getElementById(`agregar-${producto.id}`)
-
-  btnCarro.addEventListener("click", () => {
-
-    gestionarCarrito.agregarCompra(producto)
-    gestionarCarrito.guardarEnStorage()
-    gestionarCarrito.mostrarCompra(productos_carro)
-
-  })
-})
-
-
-
-gestionarRam.listaProductosRam.forEach(producto => {
-
-  const btnCarro = document.getElementById(`agregar-${producto.id}`)
-
-  btnCarro.addEventListener("click", () => {
-
-    gestionarCarrito.agregarCompra(producto)
-    gestionarCarrito.guardarEnStorage()
-    gestionarCarrito.mostrarCompra(productos_carro)
-
-  })
-})
-

@@ -69,6 +69,16 @@ position: absolute;
     gap: 90px;  
 }
 
+.btn-secondary {
+    color: #fff;
+    border: none;
+    margin-left: 42%;
+    margin-top: 5%;
+}
+
+.btn_producto{
+    margin-left: 15%;
+}
 
 
 .buscador{
@@ -82,3 +92,28 @@ position: absolute;
 .button{
     border: 10px;
 }
+
+
+
+footer{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 20vh;
+    background-color: black;
+    
+}
+
+.fa-facebook{
+    color: blue;
+}
+
+.fa-instagram {
+    color: rgb(249, 124, 144);
+}
+
+.fa-twitter {
+    color: rgb(54, 159, 201);
+}
+
