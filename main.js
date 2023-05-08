@@ -85,6 +85,18 @@ class NuestrosProductos {
         gestionarCarrito.guardarEnStorage()
         gestionarCarrito.mostrarCompra(productos_carro)
 
+        Toastify({
+          text: `${producto.nombre} añadido!`,
+          duration: 3000,
+          
+          gravity: "bottom",
+          position: "right",
+  
+          style: {
+              background: "linear-gradient(to right, #b02f00, #b2c93d)",
+          }
+      }).showToast();
+
 
       })
     })
@@ -102,6 +114,18 @@ class NuestrosProductos {
         gestionarCarrito.guardarEnStorage()
         gestionarCarrito.mostrarCompra(productos_carro)
 
+        Toastify({
+          text: `${producto.nombre} añadido!`,
+          duration: 3000,
+          
+          gravity: "bottom",
+          position: "right",
+  
+          style: {
+              background: "linear-gradient(to right, #b02f00, #b2c93d)",
+          }
+      }).showToast();
+
       })
     })
   }
@@ -117,6 +141,17 @@ class NuestrosProductos {
         gestionarCarrito.guardarEnStorage()
         gestionarCarrito.mostrarCompra(productos_carro)
 
+        Toastify({
+          text: `${producto.nombre} añadido!`,
+          duration: 3000,
+          
+          gravity: "bottom",
+          position: "right",
+  
+          style: {
+              background: "linear-gradient(to right, #b02f00, #b2c93d)",
+          }
+      }).showToast();
       })
     })
   }
@@ -131,13 +166,13 @@ class CarritoDeCompras {
 
 
 
-  verificarSiExisteElProducto(producto) {
+  comprobarSiExisteProducto(producto) {
     return this.listaCarro.find((elproducto) => elproducto.id == producto.id)
   }
 
   agregar(producto) {
 
-    let objeto = this.verificarSiExisteElProducto(producto)
+    let objeto = this.comprobarSiExisteProducto(producto)
 
     if (objeto) {
       objeto.cantidad += 1;
@@ -256,13 +291,15 @@ gestionarCarrito.levantarDeStorage()
 
 const finalizar_compra = document.getElementById("finalizar_compra")
 finalizar_compra.addEventListener("click", () => {
+
+  if(gestionarCarrito.listaCarro.length > 0) {
   Swal.fire({
     position: 'center',
     icon: 'success',
     title: 'Compra finalizada con exito',
     showConfirmButton: false,
     timer: 1500
-  })
+  })}
 
   gestionarCarrito.limpiarCarro()
 
